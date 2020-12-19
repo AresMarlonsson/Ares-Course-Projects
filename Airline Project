@@ -1,0 +1,191 @@
+// Ares Marlonsson
+// 4/3/2020
+// Airline Project
+
+
+package com.company;
+import java.util.*;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        String name;
+        String birthday;
+        String password;
+        int ticketNum;
+        int PIN;
+        int time;
+        int pinCheck;
+       // final int MAX = 999999999;
+        final int MIN = 9999;
+        final int MID = 9;
+
+        String origin;
+        String destination;
+        int departTime;
+        int arriveTime;
+
+
+        Scanner scan = new Scanner(System.in);
+        Random rand = new Random();
+
+        //ticketNum = rand.nextInt(MAX);
+        PIN = rand.nextInt(MIN);
+        time = rand.nextInt(MID);
+
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Welcome to Golden Eagle Airlines");
+        System.out.println("  - A Special Message From Our CEO Ares Marlonsson:");
+        System.out.println("    Covid-19 won't stop us from getting you to where you need to go.");
+        System.out.println("    Safe travels, and fly Golden Eagle always! From Here To Anywhere! ");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Let's Create Your Profile!");
+        System.out.println("Enter Your Full Name: ");
+        name = scan.nextLine();
+
+        System.out.println("Enter Your Birthday (MM/DD/YYYY): ");
+        birthday = scan.nextLine();
+
+        System.out.println("Enter Your password " + name + ": ");
+        password = scan.nextLine();
+
+
+        Profile profile = new Profile(name, birthday, password, PIN);
+
+        System.out.println(name + "'s Account Details: ");
+        System.out.println(profile.toString());
+        System.out.println(" Your password is a palindrome (True = Yes / False = No): ");
+        System.out.println(profile.checkPalindrome());
+
+        System.out.println(" ");
+        System.out.println(" Where Would You Like To Fly Today? ");
+
+        boolean Menu = true;
+
+
+
+        while (Menu) {
+            System.out.println(" Available Destinations\n"
+                    + "1. Venice, Italy\n"
+                    + "2. Barcelona, Spain\n"
+                    + "3. Paris, France\n"
+                    + "4. New York, United States\n"
+                    + "5. Denver, United States\n"
+                    + "6. Honolulu, Hawaii\n"
+                    + "7. Wellington, New Zealand\n"
+                    + "8. Sydney Australia\n"
+                    + "9. I would not like to purchase a plane ticket today.\n");
+
+            System.out.println("Enter Menu Option 1-9 Here: ");
+            int option = scan.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.println(name + ", You are going to Venice! ");
+                    System.out.println(" Enter your PIN to view your ticket: ");
+                    pinCheck = scan.nextInt();
+                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket1());
+                    profile.display();
+                    break;
+
+                case 2:
+                    System.out.println(name + ", You are going to Barcelona! ");
+                    //System.out.println(" Enter your PIN to view your ticket: ");
+                    //pinCheck = scan.nextInt();
+                    //profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket2());
+                    profile.display();
+                    break;
+
+                case 3:
+                    System.out.println(name + ", You are going to Paris! ");
+//                    System.out.println(" Enter your PIN to view your ticket: ");
+//                    pinCheck = scan.nextInt();
+//                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket3());
+                    profile.display();
+                    break;
+
+                case 4:
+                    System.out.println(name + ", You are going to New York! ");
+//                    System.out.println(" Enter your PIN to view your ticket: ");
+//                    pinCheck = scan.nextInt();
+//                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket4());
+                    profile.display();
+                    break;
+
+                case 5:
+                    System.out.println(name + ", You are going to Denver! ");
+//                    System.out.println(" Enter your PIN to view your ticket: ");
+//                    pinCheck = scan.nextInt();
+//                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket5());
+                    profile.display();
+                    break;
+
+                case 6:
+                    System.out.println(name + ", You are going to Honolulu! ");
+//                    System.out.println(" Enter your PIN to view your ticket: ");
+//                    pinCheck = scan.nextInt();
+//                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket6());
+                    profile.display();
+                    break;
+
+                case 7:
+                    System.out.println(name + ", You are going to Wellington! ");
+//                    System.out.println(" Enter your PIN to view your ticket: ");
+//                    pinCheck = scan.nextInt();
+//                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket7());
+                    profile.display();
+                    break;
+
+                case 8:
+                    System.out.println(name + ", You are going to Sydney! ");
+//                    System.out.println(" Enter your PIN to view your ticket: ");
+//                    pinCheck = scan.nextInt();
+//                    profile.checkPIN();
+                    System.out.println(profile.toString());
+                    System.out.println(profile.printTicket8());
+                    profile.display();
+                    break;
+
+                case 9:
+                    System.out.println("No Worries, Fly Golden Eagle Next Time!");
+                    System.exit(0);
+                    break;
+
+
+                default:
+                    if (option < 0 || option > 9) ;
+                {
+                    System.out.println("Invalid Option");
+                    System.exit(0);
+                }
+
+            }
+
+            System.out.println("Would you like to book another flight? (Yes or No)");
+            String userResponse = scan.next();
+            if (userResponse.equals("Yes")) {
+                System.out.println( Menu == true);
+
+            }
+            System.out.println("Okay, Thanks For Choosing Golden Eagle Airlines, Have A Safe Flight!");
+            System.exit(0);
+        }
+    }
+}
+
