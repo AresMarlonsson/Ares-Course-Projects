@@ -1,3 +1,5 @@
+MAIN Class
+
 // Ares Marlonsson
 // 4/3/2020
 // Airline Project
@@ -188,4 +190,171 @@ public class Main {
         }
     }
 }
+
+
+PROFILE Class
+
+package com.company;
+
+import java.util.Objects;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Profile {
+
+    //instance variables
+    private String name;
+    private String birthday;
+    private String password;
+    private int pinCheck;
+    private int PIN;
+    int MAX = 999999999;
+
+    Scanner scan = new Scanner(System.in);
+    Random rand = new Random();
+
+    int ticketNumber = rand.nextInt(MAX);
+
+
+    //constructor
+    public Profile(String inName, String inBirthday, String inPass, int inPIN){
+
+        name = inName;
+        birthday = inBirthday;
+        password = inPass;
+        //ticketNum = inID;
+        PIN = inPIN;
+
+    }
+
+    //Ticket ticket = new Ticket();
+
+    //Prints users information
+    public String toString(){
+        String details = "";
+        details = "\n Name: " + name + "\n Birthday: " + birthday + "\n Password: " + password +
+                  "\n Your PIN Number: " + PIN;
+        return details;
+    }
+
+    // Checks if password is a palindrome
+    public static String reverse(String input){
+        if(input == null || input.isEmpty()){
+            return input;
+        }
+
+        return input.charAt(input.length()- 1) + reverse(input.substring(0, input.length() - 1));
+    }
+
+     // Checks if password is a palindrome
+    public boolean checkPalindrome(){
+
+            String reverse = reverse(password);
+            if(password.equals(reverse)){
+                return true;
+            }
+            return false;
+        }
+
+    public boolean checkPIN(){
+
+       int check = pinCheck;
+       if(PIN == check){
+          System.out.println(toString());
+        }
+
+       //I know you can compare two string values with "  .equals  "
+        // but I wasn't ale to compile when I used the Int values.
+        // the "==" wont work because its comparing the two variables
+        // and not the actual contents of the variables. I would like
+        // to indicate if the PIN is incorrect and if so, prompt the
+        // user to try again. Was unsure how to do this though and it
+        // wasn't required so I just commented it out of all except case 1.
+
+        System.out.println("Incorrect PIN");
+        return false;
+    }
+
+    public void display()
+    {
+        System.out.println("        This is your ticket information!");
+
+    }
+
+    public String printTicket1() {
+
+        String ticket1 = "";
+        ticket1 = " Departing From: Nashville, TN    Arrive In: Venice, Italy  \n" +
+                " Departure Time: 10:00am   Arrival Time: 9:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket1;
+
+
+    }
+
+    public String printTicket2(){
+        String ticket2 = "";
+        ticket2 = " Departing From: Nashville,TN    Arrive In: Barcelona, Spain  \n" +
+                " Departure Time: 10:00am   Arrival Time: 9:00pm ";
+        return ticket2;
+
+    }
+
+    public String printTicket3() {
+        String ticket3 = "";
+        ticket3 = " Departing From: Nashville, TN    Arrive In: Paris, France  \n" +
+                " Departure Time: 10:00am   Arrival Time: 9:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket3;
+
+    }
+
+    public String printTicket4() {
+        String ticket4 = "";
+        ticket4 = " Departing From: Nashville, TN    Arrive In: New York, NY  \n" +
+                " Departure Time: 10:00am   Arrival Time: 9:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket4;
+
+    }
+
+    public String printTicket5() {
+        String ticket5 = "";
+        ticket5 = " Departing From: Nashville, TN    Arrive In: Denver, CO  \n" +
+                " Departure Time: 10:00am   Arrival Time: 9:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket5;
+
+    }
+
+    public String printTicket6() {
+        String ticket6 = "";
+        ticket6 = " Departing From: Nashville, TN    Arrive In: Honolulu, HI  \n" +
+                " Departure Time: 10:00am   Arrival Time: 9:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket6;
+
+    }
+
+    public String printTicket7() {
+        String ticket7 = "";
+        ticket7 = " Departing From: Nashville, TN    Arrive In: Wellington, NZ  \n" +
+                " Departure Time: 9:00am   Arrival Time:10:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket7;
+
+    }
+
+    public String printTicket8() {
+        String ticket8 = "";
+        ticket8 = " Departing From: Nashville, TN    Arrive In: Sydney, Australia  \n" +
+                " Departure Time: 8:00am   Arrival Time: 11:00pm \n" +
+                " Your Ticket Number Is: " + ticketNumber;
+        return ticket8;
+
+    }
+
+
+}
+
 
