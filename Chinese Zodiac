@@ -1,0 +1,32 @@
+// Ares Marlonsson
+// Programming Languages
+// 11/14/20
+// Chinese Zodiac in Python
+
+  year = int(input("Enter a year: "))
+  print("Based on the year you entered: ")
+  zodiac _sign = year % 12
+  if (zodiac_sign == 0): 
+     print ("The Monkey is your zodiac sign.")
+  elif(zodiac_sign == 1): 
+     print ("The Rooster is your zodiac sign.")  
+  elif(zodiac_sign == 2): 
+     print ("The Dog is your zodiac sign.")
+  elif(zodiac_sign == 3): 
+     print ("The Pig is your zodiac sign.")
+  elif(zodiac_sign == 4): 
+     print ("The Rat is your zodiac sign.")
+  elif(zodiac_sign == 5): 
+     print ("The Ox is your zodiac sign.")
+  elif(zodiac_sign == 6):
+     print ("The Tiger is your zodiac sign.")
+  elif(zodiac_sign == 7): 
+     print ("The Rabbit is your zodiac sign.")
+  elif(zodiac_sign == 8): 
+     print ("The Dragon is your zodiac sign.")
+  elif(zodiac_sign == 9): 
+     print ("The Snake is your zodiac sign.")
+  elif(zodiac_sign == 10): 
+     print ("The Horse is your zodiac sign.")
+  elif(zodiac_sign == 11): 
+     print ("The Sheep is your zodiac sign.")
