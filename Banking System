@@ -1,0 +1,392 @@
+MAIN Class
+
+// Ares Marlonsson
+// Banking Project
+// CSC 1120.02
+// Turned in February 13th
+// I have neither given nor received unauthorized aid on this project.
+// Description: This is a banking interface in which users will be able to access various features of a bank account.
+// Input: There is a menu screen the provides options for the user to help navigate the bank account.
+// Output: Well it is capable of giving a menu and asking the subsequent questions but the act of storing and adjusting
+//         the arrays was just beyond me. Should display the corrected values for each variable.
+
+
+package com.company;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        Account bank = new Account();
+        Savings savings = new Savings();
+        Checking checking = new Checking();
+        CreditCard creditCard = new CreditCard();
+        boolean Menu = true;
+
+        //Wasn't sure if you wanted us to use your menu or make our own.
+
+        while (Menu)
+        {
+            System.out.println("Main Menu\n"
+                    + "1. Write A Check\n"
+                    + "2. Checking Deposit\n"
+                    + "3. Savings Deposit\n"
+                    + "4. Savings Withdrawal\n"
+                    + "5. Make A Payment On Credit Card\n"
+                    + "6. Charge Credit Card\n"
+                    + "7. Display Checking\n"
+                    + "8. Display Savings Balance\n"
+                    + "9. Display Credit Card Balance\n"
+                    + "10. Exit Main Menu\n");
+
+
+            System.out.println("Enter Menu Option 1-10 Here: ");
+            int option = scan.nextInt();
+
+            switch(option)
+            {
+                case 1:
+                    System.out.println("What is the Check Number? ");
+                    int checkNumber = scan.nextInt();
+                    System.out.println("How much is this check for? ");
+                    double checkAmount = scan.nextInt();
+                    checking.writeCheck (checkNumber, (int) checkAmount);
+                    System.out.println("Completed");
+                    checking.display();
+                    break;
+
+                case 2:
+                    System.out.println("How much do you want to Deposit? ");
+                    double depositChecking = scan.nextDouble();
+                    checking.makeDeposit(depositChecking);
+                    System.out.println("Completed");
+                    checking.display();
+                    break;
+
+
+                case 3:
+                    System.out.println("How much do you want to Deposit? ");
+                    double depositSavings = scan.nextDouble();
+                    checking.makeDeposit(depositSavings);
+                    System.out.println("Completed");
+                    savings.display();
+                    break;
+
+                case 4:
+                    System.out.println("How much do you want to Withdraw? ");
+                    double withdrawSavings = scan.nextDouble();
+                    checking.makeDeposit(withdrawSavings);
+                    System.out.println("Completed");
+                    savings.display();
+                    break;
+
+                case 5:
+                    System.out.println("What payment amount would you like to make on your Credit Card? ");
+                    double paymentAmount = scan.nextDouble();
+                    checking.makeDeposit(paymentAmount);
+                    System.out.println("Completed");
+                    //creditCard.display();
+                    break;
+
+                case 6:
+                    System.out.println("How much would you like to charge on your Credit Card? ");
+                    double chargeAmount = scan.nextDouble();
+                    checking.makeDeposit(chargeAmount);
+                    System.out.println("Completed");
+                    //creditCard.display();
+                    break;
+
+                case 7:
+                    checking.display();
+                    break;
+
+                case 8:
+                    savings.display();
+                    break;
+
+                case 9:
+                    creditCard.display();
+                    break;
+
+                case 10:
+                    System.out.println("Goodbye");
+                    System.exit(0);
+                    break;
+
+                default:
+                    if(option < 0 || option > 10);
+                {
+                    System.out.println("Invalid Option");
+                    System.exit(0);
+                }
+
+            }
+
+            System.out.println("Do you need anything else? Yes or No: ");
+            String userResponse = scan.next();
+            if ( userResponse.equals("No"))
+                System.out.println("Goodbye");
+            System.exit(0);
+
+        }
+    }
+}
+
+
+ACCOUNT Class
+
+
+package com.company;
+public class Account {
+
+    protected String name;
+    protected long taxID;
+    protected double balance;
+    protected double []last10Withdraws; //Array
+    protected double []last10Deposits;  //Array
+    protected int numDeposits;
+    protected int numWithdraws;
+
+
+    // Constructor
+
+    public Account()
+    {
+        this.name = "Ares";
+        this.balance = 0;
+        this.taxID = 0;
+        this.numDeposits = 0;
+        this.numWithdraws = 0;
+    }
+
+    public Account(String name, double balance, int taxID)
+    {
+        this.name = "Ares";
+        this.balance = 100;
+        this.taxID = 123456;
+
+    }
+
+    //Mutators
+
+    public void setBalance()
+    {
+        balance = 100;
+    }
+
+    public void setTaxID()
+    {
+        taxID = 123456;
+    }
+
+    public void setName()
+    {
+        name = "Ares";
+    }
+
+    public void setNumberDeposits()
+    {
+        numDeposits = 0;
+    }
+
+    public void setNumberWithdraws()
+    {
+        numWithdraws = 0;
+    }
+
+    //Accessors
+
+    public double getBalance()
+    {
+        return balance;
+    }
+
+    public long getTaxID()
+    {
+        return taxID;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+
+    // access number of times program has made a withdrawal
+
+    public int getNumberWithdraws()
+    {
+        return numWithdraws;
+    }
+
+    // access number of times program has made a deposit
+
+    public int getNumberDeposits()
+    {
+        return numDeposits;
+    }
+
+
+    // Methods
+
+
+    public void makeWithdrawal (double amount) {
+        if (amount > balance) {
+            System.out.println("Not Enough Money ");
+        }
+        else {
+            balance -= amount;
+            numDeposits++;
+
+            for (int i = last10Withdraws.length - 2; i >= 0; i--) {
+                last10Withdraws[(i + 1)] = amount;
+            }
+        }
+    }
+
+    public void makeDeposit (double amount)
+    {
+        if(amount <= 0 )
+        {
+            System.out.println("Error");
+        }
+        else{
+            balance += amount;
+            numDeposits++;
+
+            for (int i = last10Deposits.length - 2; i >= 0; i--)
+            {
+                last10Deposits[(i+1)] = amount;
+            }
+        }
+    }
+
+    public void display()
+    {
+        System.out.println("Name: " + name + "Balance: " + balance + "TaxID: " + taxID);
+    }
+
+}
+
+
+CHECKING Class
+
+package com.company;
+
+public class Checking extends Account {
+
+    //Constructors
+    public Checking()
+    {
+        super();
+    }
+
+    public Checking(String name, int balance, int taxID)
+    {
+        super(name, balance, taxID);
+    }
+
+    // Method
+
+    public void writeCheck(double checkNumber, double amount)
+    {
+        if (amount > balance) {
+            System.out.println("Not Enough Money ");
+        }
+        else {
+            balance = balance - amount;
+            makeWithdrawal(amount);
+        }
+        // Not sure how to represent the check as an individual unit and store in the array
+    }
+
+    public void display()
+    {
+        System.out.println("Checks Written");
+        {
+            //for(   )
+        }
+
+
+SAVINGS Class
+
+package com.company;
+
+public class Savings extends Account {
+
+    public Savings()
+    {
+        super();
+
+    }
+
+    public Savings(String name, double balance, int taxID)
+    {
+        super(name, balance, taxID);
+
+    }
+
+    public void makeAWithdrawal(double amount)
+    {
+        makeAWithdrawal(amount);
+    }
+
+    public void display()
+    {
+        System.out.println("Last 10 Deposits");
+        // for(  )
+
+    }
+   } 
+   
+ CREDIT CARD Class  
+   
+   package com.company;
+
+public class CreditCard extends Account {
+
+    public double []last10Charges; //Array
+    private long cardNumber;
+
+    public CreditCard()
+    {
+        super();
+        this.cardNumber = 1234512345;
+    }
+
+    public CreditCard(String name, double balance, int taxID)
+    {
+        super(name, balance, taxID);
+    }
+
+    public void debitCharge(String name, double amount)
+    {
+        makeWithdrawal(amount);
+        balance = balance - amount;
+        String [] charges = {name, String.valueOf (amount)};
+        //last10Charges.add(charge);
+    }
+
+    public void makePayment(double amount)
+    {
+        makeDeposit(amount);
+        balance = balance + amount;
+    }
+
+    public void display()
+    {
+        System.out.println("Previous Charges,  ");
+
+     //  for( last10Charges )
+      // {
+
+       //}
+
+        System.out.println("Previous Deposits,  ");
+
+        // for ( last10Deposits )
+        //{
+        //}
+
+    }
