@@ -1,0 +1,136 @@
+// AresMarlonsson
+// 2/19/2020
+
+
+package com.company;
+import java.io.File;
+import java.util.*;
+//import java.io.*;
+//import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+
+public class Bullseye {
+
+    public static double Calc(double rad, double rad2) {
+
+        double calc = Math.pow(rad, 2);
+        double calc2 = Math.pow(rad2, 2);
+        double sum = calc + calc2;
+        sum = Math.sqrt(sum);
+        return sum;
+    }
+ // Assigns x and y point values to dart throw
+    public static int pointValues(double sum) {
+
+        int points = 0;
+        if(sum <= 4 )
+        {
+            points = 100;
+        }
+        else if(sum <= 8 )
+        {
+            points = 80;
+        }
+        else if(sum <= 12 )
+        {
+            points = 60;
+        }
+        else if(sum <= 16 )
+        {
+            points = 40;
+        }
+        else if(sum <= 20 )
+        {
+            points = 20;
+        }
+        return points;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        ArrayList<double[]> dartThrows = new ArrayList<double[]>();
+        Scanner fScan, Scan;
+        String file;
+        int player1Score = 0;
+        int player2Score = 0;
+
+
+        // Didn't quite understand this concept when we were working on it in class,
+        // & I'm unsure if I make a document or if this makes the document for me
+        // I know we are supposed to use a deliminator but I'm really not sure how.
+
+
+        // DecimalFormat gradeFormat = new DecimalFormat( "##.0" );
+        // double average = (double) ( total ) / count;
+        // System.out.println( "The average grade is "
+                // + gradeFormat.format( average ) );
+
+
+        fScan = new Scanner(new File("Values\\Document.txt"));
+        while (fScan.hasNext()) {
+            file = fScan.nextLine();
+            Scan = new Scanner(file);
+            Scan.useDelimiter(" ");
+
+            double x = 0;
+            // Y is not changing
+            double y = 0;
+            double a = 0;
+
+            while(Scan.hasNext()) {
+                if (a == 0)
+                {
+                    String difX = Scan.next();
+                    x = Double.valueOf(difX);
+                    a++;
+                }
+                else if (a == 1)
+                {
+                    String difY = Scan.next();
+                    y = Double.valueOf(difY);
+                    double [] table = {x,y};
+                    dartThrows.add(table);
+                    a--;
+                }
+            }
+        }
+
+        int a = 0;
+        for(double[] p: dartThrows)
+        {
+            double x = p [0];
+            double y = p [1];
+            double r = Calc(x,y);
+            int points = pointValues(r);
+
+            if (a == 0)
+            {
+                player1Score = player1Score + points;
+                a++;
+            }
+            else if(a == 1)
+            {
+                player2Score = player2Score + points;
+                a--;
+            }
+        }
+
+        if(player1Score > player2Score)
+        {
+            System.out.println("Player 1 is the winner");
+        }
+        else if (player1Score < player2Score)
+        {
+            System.out.println("Player 2 is the winner");
+        }
+        else {
+            System.out.println("Tie");
+        }
+
+        System.out.println("Player 1's Score: " + player1Score);
+        System.out.println("Player 2's Score: " + player2Score);
+
+    }
+
+}
