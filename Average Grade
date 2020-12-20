@@ -1,0 +1,144 @@
+MAIN Class
+
+
+// AresMarlonsson
+// 1/29/2020
+
+package com.company;
+
+import java.io.*;
+import java.util.*;
+
+    public class Main
+    {
+        public static void main( String [] args )
+        {
+            String inputLine = "";
+
+            int lineNumber = 4;
+
+            try
+            {
+                Scanner file = new Scanner( new File( "dataInput.txt" ) );
+                FileWriter fw = new FileWriter( "dataOutput.txt", false );
+                PrintWriter pw = new PrintWriter( fw );
+
+                while ( file.hasNext( ) )
+                {
+                    inputLine = file.nextLine( );
+                    pw.println( lineNumber + " " + inputLine );
+                    lineNumber++;
+                }
+
+                file.close( );
+                pw.close( );
+                System.out.println( "New file written" );
+            }
+
+            catch ( FileNotFoundException ioe )
+            {
+                System.out.println( "Unable to find dataInput.txt" );
+            }
+
+            catch ( NoSuchElementException nse )
+            {
+                System.out.println( nse.getMessage( ) );
+            }
+
+            catch ( IllegalStateException ise )
+            {
+                System.out.println( ise.getMessage( ) );
+            }
+
+            catch ( IOException ioe )
+            {
+                System.out.println( "Unable to open file for writing" );
+            }
+        }
+
+
+
+
+
+
+
+AVERAGE Class
+
+
+package com.company;
+import java.util.*;
+//import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+
+    public class AverageGrade
+    {
+        public static void main( String [] args )
+        {
+
+            try
+            {
+                Scanner scan = new Scanner(System.in);
+
+                //no longer reading from file, instead reading from console, typed
+                //Scanner file = new Scanner( new File( "grades.txt" ) );
+
+                //double value = scan.nextDouble();
+
+
+                int total = 0, count = 0; // initialize total and count
+
+                // declare String variable and initialize
+                String stringRead = "";
+
+                while ( count < 10 )  // test for inputting 10 digits
+                {
+                    stringRead = scan.nextLine( ); // read a line
+
+                    try
+                    {
+                        int grade = Integer.parseInt( stringRead );
+                        total += grade;
+                        count++;
+                    }
+                    catch ( NumberFormatException nfe )
+                    {
+                        System.out.println( stringRead + " is an invalid grade, skipping" );
+                    }
+
+                }
+
+                // Have to add condition that makes sure avergae takes up to 10 values then stops
+
+                //if(
+                //
+
+                DecimalFormat gradeFormat = new DecimalFormat( "##.0" );
+                double average = (double) ( total ) / count;
+                System.out.println( "The average grade is "
+                        + gradeFormat.format( average ) );
+
+                // release resources associated with grades.txt
+                scan.close( );
+            }
+
+
+
+                catch ( NumberFormatException nfe )
+            {
+                System.out.println( "Unable to find grades.txt, exiting" );
+            }
+
+        catch ( NoSuchElementException nse )
+            {
+                nse.printStackTrace( );
+            }
+
+        catch ( IllegalStateException ise )
+            {
+                ise.printStackTrace( );
+                //ise.getMessage();
+            }
+        }
+    }
+
