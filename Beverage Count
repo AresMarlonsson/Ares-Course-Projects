@@ -1,0 +1,76 @@
+// Ares Marlonsson
+// Milkshake Beverage Project
+
+
+package com.company;
+import java.util.*;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+
+        int shakeNum = 0;
+        int offCounter = 0;
+        Scanner scan = new Scanner(System.in);
+
+
+
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("  Hello! Today I'm going to sing you a song, but i'm going to need your help!");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println(" ");
+        System.out.println("  Please answer the following questions,");
+        System.out.println("  You may only answer with a positive integer. ");
+        System.out.println("  Enter your answers below the question and then press return. ");
+        System.out.println(" ");
+
+
+        // Bottles on the wall
+        do
+        {
+            System.out.println("How many milkshakes would you like to start with?");
+            shakeNum = scan.nextInt();
+
+            if(shakeNum <= 0)
+            {
+                System.out.println("You must start with a positive number of milkshakes, please try again");
+            }
+        }
+        while(shakeNum <= 0);
+
+
+        // Bottles Off The Wall
+        do
+        {
+            System.out.println("How many milkshakes would you like to take off the counter each time?");
+            offCounter = scan.nextInt();
+
+            if(offCounter <= 0)
+            {
+                System.out.println("You must remove a positive number of milkshakes, please try again");
+            }
+        }
+        while(offCounter <= 0);
+
+
+        // Error Check
+        if(shakeNum < offCounter)
+        {
+            System.out.println("You tried to take more milkshakes off the counter than you had to start with. No song for you!");
+            System.exit(0);
+        }
+
+
+        // Song Lyrics
+        while(shakeNum - offCounter >= 0)
+        {
+            System.out.println("\n" + shakeNum + " milkshakes on the counter! " + shakeNum + " milkshakes on the counter ");
+            shakeNum -= offCounter;
+            System.out.println("Take " + offCounter + " milkshakes off the counter, pass them around, " + shakeNum + " milk shakes on the counter ");
+        }
+
+
+
+    }
